@@ -14,7 +14,7 @@ body.dark {
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   transition: background-color 0.3s, color 0.3s;
@@ -31,5 +31,68 @@ header {
 }
 
 h1 {
+  margin: 0;
   font-size: 1.5rem;
-  margin:
+}
+
+#theme-toggle {
+  background-color: white;
+  color: var(--accent);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#theme-toggle:hover {
+  background-color: #e0e0e0;
+}
+
+main#dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.card {
+  background-color: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  color: var(--accent);
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+canvas {
+  width: 100% !important;
+  height: 250px !important;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #888;
+  background-color: var(--bg);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
