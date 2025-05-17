@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CO Monitoring Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CO Monitoring Dashboard Pro</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
 </head>
 <body>
   <header>
-    <h1>CO Monitoring Dashboard</h1>
-    <button id="theme-toggle">🌓 Toggle Theme</button>
+    <h1>CO Monitoring Dashboard Pro</h1>
+    <div class="controls">
+      <button id="theme">🌓 Theme</button>
+      <button id="login-btn">Login</button>
+      <button id="logout-btn" style="display:none;">Logout</button>
+    </div>
   </header>
+
+  <section id="login-section" class="modal hidden">
+    <div class="modal-content">
+      <h2>Login</h2>
+      <input id="username" placeholder="Username" />
+      <input id="password" type="password" placeholder="Password" />
+      <button id="submit-login">Submit</button>
+      <button id="close-login">Cancel</button>
+    </div>
+  </section>
+
+  <section class="filters">
+    <label>Date From: <input type="date" id="date-from" /></label>
+    <label>Date To: <input type="date" id="date-to" /></label>
+    <button id="filter-btn">Filter</button>
+    <button id="export-btn">Export CSV</button>
+  </section>
 
   <main id="dashboard"></main>
 
-  <footer>&copy; 2025 cowstarr | CO Monitoring with MQ135</footer>
+  <section id="map" class="map"></section>
+
+  <footer>&copy; 2025 FINAL PROJECT | CO Monitoring with MQ135</footer>
 
   <script src="script.js"></script>
 </body>
