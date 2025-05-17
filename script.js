@@ -1,85 +1,53 @@
 window.onload = function() {
-  // CONFIG - replace with your ThingSpeak channel ID
-  const channelID = 2963348;  
+  const channelID = 2963348;  // Replace with your ThingSpeak channel ID
   const sensorCount = 4;
-  const dataPoints = 20;
-
-  const themeToggle = document.getElementById("theme-toggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-  });
+  const dataPoints = 50;
+  const alertThreshold = 100; // Example threshold for alert
 
   const dashboard = document.getElementById("dashboard");
+  const themeToggle = document.getElementById("theme-toggle");
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const loginSection = document.getElementById("login-section");
+  const submitLogin = document.getElementById("submit-login");
+  const closeLogin = document.getElementById("close-login");
+  const filterBtn = document.getElementById("filter-btn");
+  const exportBtn = document.getElementById("export-btn");
+  const dateFromInput = document.getElementById("date-from");
+  const dateToInput = document.getElementById("date-to");
 
-  // Create cards dynamically
-  for (let i = 1; i <= sensorCount; i++) {
-    dashboard.innerHTML += `
-      <div class="card">
-        <h2>Sensor ${i}</h2>
-        <div class="value" id="value${i}">--</div>
-        <canvas id="chart${i}"></canvas>
-      </div>
-    `;
-    fetchAndDisplaySensorData(i);
+  // Store charts globally for update
+  let charts = [];
+  let sensorDataAll = []; // Will hold all fetched data per sensor for filtering/export
+
+  // Set initial theme based on localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add("dark");
   }
 
-  // Fetch data from ThingSpeak & draw charts
-  function fetchAndDisplaySensorData(fieldNum) {
-    const url = `https://api.thingspeak.com/channels/${channelID}/fields/${fieldNum}.json?results=${dataPoints}`;
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  });
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        const values = data.feeds
-          .map(feed => parseFloat(feed[`field${fieldNum}`]))
-          .filter(v => !isNaN(v));
-        const labels = data.feeds.map(feed =>
-          new Date(feed.created_at).toLocaleTimeString()
-        );
+  loginBtn.addEventListener("click", () => {
+    loginSection.classList.remove("hidden");
+  });
 
-        // Update latest value
-        document.getElementById(`value${fieldNum}`).textContent =
-          values.length > 0 ? values[values.length - 1] : "--";
+  closeLogin.addEventListener("click", () => {
+    loginSection.classList.add("hidden");
+  });
 
-        // Draw chart
-        new Chart(document.getElementById(`chart${fieldNum}`), {
-          type: "line",
-          data: {
-            labels,
-            datasets: [
-              {
-                label: `Sensor ${fieldNum}`,
-                data: values,
-                borderColor: "#007acc",
-                backgroundColor: "rgba(0,122,204,0.1)",
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointHoverRadius: 6,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: false },
-              tooltip: { mode: "index", intersect: false },
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: { display: true, text: "CO Level (ppm)" },
-              },
-              x: {
-                title: { display: true, text: "Time" },
-              },
-            },
-          },
-        });
-      })
-      .catch(e => {
-        console.error(`Error loading data for field ${fieldNum}`, e);
-        document.getElementById(`value${fieldNum}`).textContent = "Error";
-      });
-  }
-};
+  logoutBtn.addEventListener("click", () => {
+    alert("Logged out!");
+    logoutBtn.style.display = "none";
+    loginBtn.style.display = "inline-block";
+  });
+
+  submitLogin.addEventListener("click", () => {
+    // MOCK login, accept any input
+    alert("Logged in!");
+    loginSection.classList.add("hidden");
+    loginBtn.style.display = "none";
+    logoutBtn.style
+
