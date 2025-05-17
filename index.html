@@ -2,41 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CO Monitoring Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f4f6f8;
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
       color: #333;
     }
 
     header {
-      background: #007acc;
+      background-color: #111827;
       color: white;
-      padding: 1rem 2rem;
+      padding: 1.5rem;
       text-align: center;
     }
 
-    .container {
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
       padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .chart-box {
+    .card {
       background: white;
-      padding: 1rem;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s;
     }
 
-    .chart-box h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      background-color: #007acc;
+      color: white;
+      padding: 1rem;
       text-align: center;
+      font-weight: 600;
     }
 
     iframe {
@@ -47,9 +62,9 @@
 
     footer {
       text-align: center;
-      padding: 1rem;
       font-size: 0.9rem;
-      color: #777;
+      color: #666;
+      padding: 1rem;
     }
   </style>
 </head>
@@ -57,32 +72,33 @@
 
   <header>
     <h1>CO Monitoring Dashboard</h1>
-    <p>Real-time data from MQ135 sensors</p>
+    <p>Real-time Data from 4 MQ135 Sensors</p>
   </header>
 
-  <div class="container">
-    <div class="chart-box">
-      <h2>Sensor 1</h2>
+  <section class="dashboard">
+    <div class="card">
+      <div class="card-header">Sensor 1</div>
       <iframe src="https://thingspeak.com/channels/2963348/charts/1?bgcolor=%23ffffff&color=%23007acc&dynamic=true&type=line"></iframe>
     </div>
-    <div class="chart-box">
-      <h2>Sensor 2</h2>
+    <div class="card">
+      <div class="card-header">Sensor 2</div>
       <iframe src="https://thingspeak.com/channels/2963348/charts/2?bgcolor=%23ffffff&color=%23d62728&dynamic=true&type=line"></iframe>
     </div>
-    <div class="chart-box">
-      <h2>Sensor 3</h2>
+    <div class="card">
+      <div class="card-header">Sensor 3</div>
       <iframe src="https://thingspeak.com/channels/2963348/charts/3?bgcolor=%23ffffff&color=%232ca02c&dynamic=true&type=line"></iframe>
     </div>
-    <div class="chart-box">
-      <h2>Sensor 4</h2>
+    <div class="card">
+      <div class="card-header">Sensor 4</div>
       <iframe src="https://thingspeak.com/channels/2963348/charts/4?bgcolor=%23ffffff&color=%23ff7f0e&dynamic=true&type=line"></iframe>
     </div>
-  </div>
+  </section>
 
   <footer>
-    &copy; 2025 CO Monitoring Project by cowstarr
+    &copy; 2025 cowstarr | CO Monitoring Web Dashboard
   </footer>
 
 </body>
 </html>
+
 
