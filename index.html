@@ -1,22 +1,88 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <title>CO Monitor Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CO Monitoring Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background: #007acc;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .chart-box {
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chart-box h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 260px;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-  <h1>CO Levels from MQ135 Sensors</h1>
 
-  <h3>Sensor 1</h3>
-  <iframe width="450" height="260" src="https://thingspeak.com/channels/2963348/charts/1"></iframe>
+  <header>
+    <h1>CO Monitoring Dashboard</h1>
+    <p>Real-time data from MQ135 sensors</p>
+  </header>
 
-  <h3>Sensor 2</h3>
-  <iframe width="450" height="260" src="https://thingspeak.com/channels/2963348/charts/2"></iframe>
+  <div class="container">
+    <div class="chart-box">
+      <h2>Sensor 1</h2>
+      <iframe src="https://thingspeak.com/channels/2963348/charts/1?bgcolor=%23ffffff&color=%23007acc&dynamic=true&type=line"></iframe>
+    </div>
+    <div class="chart-box">
+      <h2>Sensor 2</h2>
+      <iframe src="https://thingspeak.com/channels/2963348/charts/2?bgcolor=%23ffffff&color=%23d62728&dynamic=true&type=line"></iframe>
+    </div>
+    <div class="chart-box">
+      <h2>Sensor 3</h2>
+      <iframe src="https://thingspeak.com/channels/2963348/charts/3?bgcolor=%23ffffff&color=%232ca02c&dynamic=true&type=line"></iframe>
+    </div>
+    <div class="chart-box">
+      <h2>Sensor 4</h2>
+      <iframe src="https://thingspeak.com/channels/2963348/charts/4?bgcolor=%23ffffff&color=%23ff7f0e&dynamic=true&type=line"></iframe>
+    </div>
+  </div>
 
-  <h3>Sensor 3</h3>
-  <iframe width="450" height="260" src="https://thingspeak.com/channels/2963348/charts/3"></iframe>
+  <footer>
+    &copy; 2025 CO Monitoring Project by cowstarr
+  </footer>
 
-  <h3>Sensor 4</h3>
-  <iframe width="450" height="260" src="https://thingspeak.com/channels/2963348/charts/4"></iframe>
 </body>
 </html>
+
