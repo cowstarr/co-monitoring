@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("themeToggle").addEventListener("click", toggleTheme);
 });
 
+
 function fetchAndRenderChart(fieldNum) {
   const url = `https://api.thingspeak.com/channels/${channelID}/fields/${fieldNum}.json?results=30`;
 
@@ -49,6 +50,9 @@ function getColor(field) {
 
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
+  const btn = document.getElementById("themeToggle");
+  const isDark = document.body.classList.contains("dark-mode");
+  btn.textContent = isDark ? "🌞" : "🌙";
 }
 
 function downloadCSV() {
