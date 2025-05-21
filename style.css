@@ -26,11 +26,14 @@ h1 {
 
 button {
   padding: 0.5em 1em;
+  font-size: 1.2rem;
   border: none;
   background-color: #444;
   color: white;
   cursor: pointer;
+  border-radius: 5px;
 }
+
 
 main {
   padding: 1em;
