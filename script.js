@@ -1,53 +1,57 @@
-window.onload = function() {
-  const channelID = 2963348;  // Replace with your ThingSpeak channel ID
-  const sensorCount = 4;
-  const dataPoints = 50;
-  const alertThreshold = 100; // Example threshold for alert
+const channelID = "2963348";
+const fields = [1, 2, 3, 4];
+const charts = {};
 
-  const dashboard = document.getElementById("dashboard");
-  const themeToggle = document.getElementById("theme-toggle");
-  const loginBtn = document.getElementById("login-btn");
-  const logoutBtn = document.getElementById("logout-btn");
-  const loginSection = document.getElementById("login-section");
-  const submitLogin = document.getElementById("submit-login");
-  const closeLogin = document.getElementById("close-login");
-  const filterBtn = document.getElementById("filter-btn");
-  const exportBtn = document.getElementById("export-btn");
-  const dateFromInput = document.getElementById("date-from");
-  const dateToInput = document.getElementById("date-to");
+document.addEventListener("DOMContentLoaded", () => {
+  fields.forEach((field) => fetchAndRenderChart(field));
+  document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+});
 
-  // Store charts globally for update
-  let charts = [];
-  let sensorDataAll = []; // Will hold all fetched data per sensor for filtering/export
+function fetchAndRenderChart(fieldNum) {
+  const url = `https://api.thingspeak.com/channels/${channelID}/fields/${fieldNum}.json?results=30`;
 
-  // Set initial theme based on localStorage
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add("dark");
-  }
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const labels = data.feeds.map(feed => feed.created_at);
+      const values = data.feeds.map(feed => parseFloat(feed[`field${fieldNum}`]));
 
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-  });
+      const ctx = document.getElementById(`chart${fieldNum}`).getContext("2d");
+      charts[fieldNum] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: `Field ${fieldNum} (ppm)`,
+            data: values,
+            borderColor: getColor(fieldNum),
+            backgroundColor: 'transparent',
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 1500
+            }
+          }
+        }
+      });
+    });
+}
 
-  loginBtn.addEventListener("click", () => {
-    loginSection.classList.remove("hidden");
-  });
+function getColor(field) {
+  const colors = ["#007BFF", "#28a745", "#ffc107", "#dc3545"];
+  return colors[field - 1] || "#333";
+}
 
-  closeLogin.addEventListener("click", () => {
-    loginSection.classList.add("hidden");
-  });
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+}
 
-  logoutBtn.addEventListener("click", () => {
-    alert("Logged out!");
-    logoutBtn.style.display = "none";
-    loginBtn.style.display = "inline-block";
-  });
-
-  submitLogin.addEventListener("click", () => {
-    // MOCK login, accept any input
-    alert("Logged in!");
-    loginSection.classList.add("hidden");
-    loginBtn.style.display = "none";
-    logoutBtn.style
-
+function downloadCSV() {
+  const csvLink = `https://thingspeak.com/channels/${channelID}/feed.csv`;
+  window.open(csvLink, "_blank");
+}
