@@ -23,7 +23,7 @@ function fetchAndRenderChart(fieldNum) {
         data: {
           labels,
           datasets: [{
-            label: `Field ${fieldNum} (ppm)`,
+            label: `SENSOR ${fieldNum} (ppm)`,
             data: values,
             borderColor: getColor(fieldNum),
             backgroundColor: 'transparent',
