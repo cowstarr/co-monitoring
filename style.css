@@ -83,3 +83,12 @@ footer {
 .dark-mode .subtext {
   color: #ccc;
 }
+.team-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5em;
+}
+
+.team-list li {
+  margin: 0.2em 0;
+}
