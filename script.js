@@ -1,7 +1,6 @@
 const channelID = "2963348";
 const fields = [1, 2, 3, 4];
 const charts = {};
-const localTime = new Date(utcTimeString); // auto-converts to browser local time
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -60,20 +59,4 @@ function toggleTheme() {
 function downloadCSV() {
   const csvLink = `https://thingspeak.com/channels/${channelID}/feed.csv`;
   window.open(csvLink, "_blank");
-}
-scales: {
-  x: {
-    type: 'time',
-    time: {
-      unit: 'hour',
-      tooltipFormat: 'MMM d, HH:mm',
-      displayFormats: {
-        hour: 'HH:mm'
-      }
-    },
-    title: {
-      display: true,
-      text: 'Time'
-    }
-  }
 }
