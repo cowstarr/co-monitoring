@@ -1,6 +1,8 @@
 const channelID = "2963348";
 const fields = [1, 2, 3, 4];
 const charts = {};
+const localTime = new Date(utcTimeString); // auto-converts to browser local time
+
 
 document.addEventListener("DOMContentLoaded", () => {
   fields.forEach((field) => fetchAndRenderChart(field));
@@ -59,10 +61,19 @@ function downloadCSV() {
   const csvLink = `https://thingspeak.com/channels/${channelID}/feed.csv`;
   window.open(csvLink, "_blank");
 }
-const utcTime = '2024-05-23T13:00:00Z';
-const localTime = new Date(utcTime).toLocaleString('en-US', {
-  timeZone: 'Asia/Jakarta',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false
-});
+scales: {
+  x: {
+    type: 'time',
+    time: {
+      unit: 'hour',
+      tooltipFormat: 'MMM d, HH:mm',
+      displayFormats: {
+        hour: 'HH:mm'
+      }
+    },
+    title: {
+      display: true,
+      text: 'Time'
+    }
+  }
+}
