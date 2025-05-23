@@ -1,10 +1,6 @@
 const channelID = "2963348";
 const fields = [1, 2, 3, 4];
 const charts = {};
-const jakartaTimeZone = 'Asia/Jakarta';
-const timestamps = data.feeds.map(entry =>
-  new Date(new Date(entry.created_at).toLocaleString('en-US', { timeZone: jakartaTimeZone }))
-);
 
 
 
@@ -64,22 +60,4 @@ function toggleTheme() {
 function downloadCSV() {
   const csvLink = `https://thingspeak.com/channels/${channelID}/feed.csv`;
   window.open(csvLink, "_blank");
-}
-options: {
-  scales: {
-    x: {
-      type: 'time',
-      time: {
-        unit: 'hour',
-        tooltipFormat: 'MMM d, HH:mm',
-        displayFormats: {
-          hour: 'HH:mm'  // This will show hours in Jakarta time
-        }
-      },
-      title: {
-        display: true,
-        text: 'Time (Jakarta)'
-      }
-    }
-  }
 }
